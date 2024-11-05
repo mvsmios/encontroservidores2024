@@ -3190,7 +3190,7 @@ margin-top: -10rem;
   border-radius: 20px;
 }
 .podium div {
-  width: 150px;
+  max-width: 150px;
   
   text-align: center;
   font-size: 2em;
