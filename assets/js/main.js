@@ -216,3 +216,82 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+
+
+const lenis = new Lenis()
+
+lenis.on('scroll', (e) => {
+  console.log(e)
+})
+
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)
+
+let currentScroll = 0;
+let isScrollingDown = true;
+let arrows = document.querySelectorAll(".arrow");
+
+let tween = gsap
+  .to(".marquee__part", {
+    xPercent: -100,
+    repeat: -1,
+    duration: 5,
+    ease: "linear",
+  })
+  .totalProgress(0.5);
+
+gsap.set(".marquee__inner", { xPercent: -50 });
+
+window.addEventListener("scroll", function () {
+  if (window.pageYOffset > currentScroll) {
+    isScrollingDown = true;
+  } else {
+    isScrollingDown = false;
+  }
+
+  gsap.to(tween, {
+    timeScale: isScrollingDown ? 1 : -1,
+  });
+
+  arrows.forEach((arrow) => {
+    if (isScrollingDown) {
+      arrow.classList.remove("active");
+    } else {
+      arrow.classList.add("active");
+    }
+  });
+
+  currentScroll = window.pageYOffset;
+});
+
+
+var tl30 = gsap.timeline({
+  scrollTrigger: {
+      trigger: ".page1 ",
+      start: "top 50%",
+      end: "top 0%",
+      scrub: 3,
+  }
+})
+tl30.to(".page1 video", {
+  width: "100%",
+  duration:0.8,
+
+  ease: "power2.out",
+
+}, "a")
+
+
+const lightbox = GLightbox({
+  selector: '.glightbox',
+  loop: true,              // Loop through images
+  touchNavigation: true,    // Enable swipe navigation on mobile
+  keyboardNavigation: true, // Enable keyboard navigation
+  closeButton: true,        // Show close button
+  autoplayVideos: true      // Autoplay videos if present
+});
