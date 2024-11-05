@@ -3206,7 +3206,7 @@ margin-top: -10rem;
 .podium div::before {
   content: "";
   display: block;
-  width: 100%;
+  width: 80%;
   height: 3px;
   position: absolute;
   top: 0;
